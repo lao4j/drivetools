@@ -14,7 +14,6 @@ public class ListUtils {
 
     /**
      * 拆分集合
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param resList 要拆分的集合
      * @param count   每个集合的元素个数
@@ -54,7 +53,6 @@ public class ListUtils {
 
     /**
       * 将字符串数组转换成整型数组
-      * @author lao4j
       * @date 2020/5/11 10:37
       * @param resList
       */
@@ -70,7 +68,6 @@ public class ListUtils {
 
     /**
      * 集合去重
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param list
      */
@@ -81,7 +78,6 @@ public class ListUtils {
 
     /**
      * 给集合的所有元素增加前缀和后缀
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param list
      */
@@ -95,7 +91,6 @@ public class ListUtils {
 
     /**
      * 根据分隔符生成list数组
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param s
      * @param sp
@@ -117,7 +112,6 @@ public class ListUtils {
 
     /**
      * 判断是否包含
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param list
      * @param s
@@ -136,7 +130,6 @@ public class ListUtils {
 
     /**
      * 按字母和匹配度排序，匹配度优选,字母不区分大小写
-     * @author lao4j
      * @date 2020/5/11 10:37
      * @param list
      * @param keyword
