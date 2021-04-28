@@ -7,7 +7,7 @@ import java.util.*;
 
 /**
   * @description 集合操作类
-  * @author lao4j
+  * @author yongxuan.chen
   * @date 2021/4/21 15:45
   */
 public class ListUtils {
