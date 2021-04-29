@@ -22,8 +22,10 @@ import java.text.SimpleDateFormat;
 @Slf4j
 public class JsonUtils {
 
-    private static ObjectMapper objectMapper = new ObjectMapper();
-    // 日起格式化
+    private static final ObjectMapper objectMapper = new ObjectMapper();
+    /**
+      * 日期默认格式
+      */
     private static final String STANDARD_FORMAT = DateUtils.FORMAT_YYYY_MM_DD_HH_MM_SS;
 
     static {
@@ -37,6 +39,15 @@ public class JsonUtils {
         .setDateFormat(new SimpleDateFormat(STANDARD_FORMAT))
         //忽略 在json字符串中存在，但是在java对象中不存在对应属性的情况。防止错误
         .configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+    }
+
+    /**
+      * getObjectMapper
+     *
+      * @return objectMapper
+      */
+    public static ObjectMapper getObjectMapper() {
+        return objectMapper;
     }
 
     /**
@@ -106,8 +117,8 @@ public class JsonUtils {
         }
     }
 
-    public static <T> T string2Obj(String str, Class<?> collectionClazz, Class<?>... elementClazzes) {
-        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClazz, elementClazzes);
+    public static <T> T string2Obj(String str, Class<?> collectionClazz, Class<?>... elementClasses) {
+        JavaType javaType = objectMapper.getTypeFactory().constructParametricType(collectionClazz, elementClasses);
         try {
             return objectMapper.readValue(str, javaType);
         } catch (IOException e) {
@@ -115,6 +126,5 @@ public class JsonUtils {
             return null;
         }
     }
-
 
 }
