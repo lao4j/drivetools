@@ -11,10 +11,10 @@ import java.util.Calendar;
 import java.util.Date;
 
 /**
-  * @description 日期时间操作工具类
-  * @author yongxuan.chen
-  * @date 2021/4/21 15:32
-  */
+ * @author yongxuan.chen
+ * @description 日期时间操作工具类
+ * @date 2021/4/21 15:32
+ */
 public class DateUtils {
     private final static Logger log = LoggerFactory.getLogger(DateUtils.class);
 
@@ -23,8 +23,10 @@ public class DateUtils {
     public static final String FORMAT_YYYYMMDD = "yyyyMMdd";
     public static final String FORMAT_YYYYMM = "yyyyMM";
     public static final String FORMAT_YYYY_MM_DD_CN = "yyyy年MM月dd日";
+    public static final String FORMAT_YYYY_MM_DD = "yyyy-MM-dd";
     public static final String FORMAT_YYYY_MM_DD_HH_MM = "yyyy-MM-dd HH:mm";
     public static final String FORMAT_YYYY_MM_DD_HH_MM_SS = "yyyy-MM-dd HH:mm:ss";
+    public static final String FORMAT_HH_MM_SS = "HH:mm:ss";
     public final static int SECONDS_OF_HOUR = 60 * 60;
     public final static int SECONDS_OF_DAY = 24 * 60 * 60;
     public final static int SECONDS_OF_MIN = 60;
@@ -101,6 +103,7 @@ public class DateUtils {
 
     /**
      * 时间戳转换成时间 格式:yyyy/MM/dd-HH:mm:ss 2017/03/30-14:41:00
+     *
      * @param pTime
      */
     public static String timeDeal(String pTime) {
@@ -113,16 +116,18 @@ public class DateUtils {
 
     /**
      * 时间戳转换成时间 格式:yyyy-MM-dd HH:mm:ss
+     *
      * @param sTime
      */
     public static String stampToDate(long sTime) {
         Date date = new Date(sTime);
-        return DateFormatUtils.format(date, "yyyy-MM-dd HH:mm:ss");
+        return DateFormatUtils.format(date, FORMAT_YYYY_MM_DD_HH_MM_SS);
     }
 
 
     /**
      * 时间戳转换成时间 格式:yyyy-MM-dd HH:mm
+     *
      * @param sTime
      */
     public static String stampToDateMin(long sTime) {
@@ -133,6 +138,7 @@ public class DateUtils {
     /**
      * 时间戳转换成时间 格式:yyyy-MM-dd_HH:mm:ss
      * 2018-01-01_16:10:00
+     *
      * @param sTime
      */
     public static String timestampToDate(long sTime) {
@@ -142,6 +148,7 @@ public class DateUtils {
 
     /**
      * 时间戳转换成时间
+     *
      * @param sTime
      */
     public static String timestampToDate(long sTime, String format) {
@@ -151,6 +158,7 @@ public class DateUtils {
 
     /**
      * 根据时间获取时间戳单位(ms)
+     *
      * @param time
      */
     public static long dateToStamp(String time) {
@@ -162,6 +170,7 @@ public class DateUtils {
 
     /**
      * 日期格式字符串转换成时间戳
+     *
      * @param date_str 字符串日期
      */
     public static String date2TimeStamp(String date_str) {
@@ -177,6 +186,7 @@ public class DateUtils {
 
     /**
      * 日期格式字符串转换成时间戳
+     *
      * @param date_str 字符串日期
      */
     public static String date2TimeStampLong(String date_str) {
@@ -194,6 +204,7 @@ public class DateUtils {
 
     /**
      * 日期转换成时间戳
+     *
      * @param date 字符串日期
      */
     public static String date2TimeStamp(Date date) {
@@ -268,6 +279,7 @@ public class DateUtils {
 
     /**
      * 获取精度到天的日期
+     *
      * @param d
      */
     public static Date getEndDate(Date d) {
@@ -279,11 +291,13 @@ public class DateUtils {
         c.set(Calendar.HOUR_OF_DAY, 0);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         return c.getTime();
     }
 
     /**
      * 获取精度到分钟的日期
+     *
      * @param d
      */
     public static Date getEndMin(Date d) {
@@ -293,11 +307,13 @@ public class DateUtils {
         Calendar c = Calendar.getInstance();
         c.setTime(d);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         return c.getTime();
     }
 
     /**
      * 获取精度到小时的日期
+     *
      * @param d
      */
     public static Date getEndHour(Date d) {
@@ -308,11 +324,13 @@ public class DateUtils {
         c.setTime(d);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         return c.getTime();
     }
 
     /**
      * 获取时间所在小时的最后一个时间，精度到秒
+     *
      * @param timeStamp
      */
     public static Long getHourEndTimeStamp(Long timeStamp) {
@@ -321,11 +339,13 @@ public class DateUtils {
         c.setTime(endHour);
         c.set(Calendar.MINUTE, 59);
         c.set(Calendar.SECOND, 59);
+        c.set(Calendar.MILLISECOND, 999);
         return c.getTimeInMillis();
     }
 
     /**
      * 获取时间所在小时的第一个时间，精度到秒
+     *
      * @param timeStamp
      */
     public static Long getHourStartTimeStamp(Long timeStamp) {
@@ -334,6 +354,7 @@ public class DateUtils {
         c.setTime(endHour);
         c.set(Calendar.MINUTE, 0);
         c.set(Calendar.SECOND, 0);
+        c.set(Calendar.MILLISECOND, 0);
         return c.getTimeInMillis();
     }
 
@@ -343,7 +364,7 @@ public class DateUtils {
      * @param format
      */
     public static Date strToDate(String date, String format) {
-        format = StringUtils.isBlank(format) ? "yyyy-MM-dd HH:mm:ss" : format;
+        format = StringUtils.isBlank(format) ? FORMAT_YYYY_MM_DD_HH_MM_SS : format;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         Date parse = null;
         try {
@@ -356,6 +377,7 @@ public class DateUtils {
 
     /**
      * 判断两个日期是否是同一天
+     *
      * @param sDate
      * @param eDate
      */
@@ -367,23 +389,35 @@ public class DateUtils {
 
     /**
      * 判断两个日期是否是同一天
+     *
      * @param sDate
      * @param eDate
      */
     public static Boolean isSameDay(Date sDate, Date eDate) {
-        String s = date2Str(sDate, "yyyy-MM-dd");
-        String e = date2Str(eDate, "yyyy-MM-dd");
+        String s = date2Str(sDate, FORMAT_YYYY_MM_DD);
+        String e = date2Str(eDate, FORMAT_YYYY_MM_DD);
         return s.equals(e);
     }
 
     /**
      * 日期转字符串
+     *
      * @param date
      * @param format
      */
     public static String date2Str(Date date, String format) {
-        format = StringUtils.isBlank(format) ? "yyyy-MM-dd HH:mm:ss" : format;
+        format = StringUtils.isBlank(format) ? FORMAT_YYYY_MM_DD_HH_MM_SS : format;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
+        return simpleDateFormat.format(date);
+    }
+
+    /**
+     * 日期转字符串
+     *
+     * @param date
+     */
+    public static String date2FormatStr(Date date) {
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_YYYY_MM_DD_HH_MM_SS);
         return simpleDateFormat.format(date);
     }
 
@@ -393,24 +427,26 @@ public class DateUtils {
      * @param format
      */
     public static String date2Str(String date, String format) {
-        format = StringUtils.isBlank(format) ? "yyyy-MM-dd HH:mm:ss" : format;
+        format = StringUtils.isBlank(format) ? FORMAT_YYYY_MM_DD_HH_MM_SS : format;
         SimpleDateFormat simpleDateFormat = new SimpleDateFormat(format);
         return simpleDateFormat.format(parseDate(date));
     }
 
     /**
      * 获取指定日期当天的第一时刻
+     *
      * @param date
      */
     public static Date dayFirst(Date date) {
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_YYYY_MM_DD);
         String dateStr = simpleDateFormat.format(date);
         dateStr += " 00:00:00";
-        return strToDate(dateStr, "yyyy-MM-dd HH:mm:ss");
+        return strToDate(dateStr, FORMAT_YYYY_MM_DD_HH_MM_SS);
     }
 
     /**
      * 转换
+     *
      * @param time
      * @param fromFormat
      * @param toFormat
@@ -429,6 +465,7 @@ public class DateUtils {
 
     /**
      * ms 将时间转化成分钟，粒度到分钟  向后归并
+     *
      * @param timestamp
      */
     public static long timeStampToMinuteBackward(long timestamp) {
@@ -442,6 +479,7 @@ public class DateUtils {
 
     /**
      * ms 将时间转化成分钟，粒度到分钟  向前归并
+     *
      * @param timestamp
      */
     public static long timeStampToMinute(long timestamp) {
@@ -451,6 +489,7 @@ public class DateUtils {
 
     /**
      * 时间戳转换成时间 格式:yyyy/MM/dd-HH:mm:ss 2017/03/30-14:41:00
+     *
      * @param sTime
      */
     public static String stampToDateType(long sTime) {
@@ -467,7 +506,7 @@ public class DateUtils {
      */
     public static String stampToDateTime(long sTime) {
         String resTime;
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(FORMAT_YYYY_MM_DD_HH_MM_SS);
         Date date = new Date(sTime);
         resTime = simpleDateFormat.format(date);
         return resTime;
@@ -475,6 +514,7 @@ public class DateUtils {
 
     /**
      * 时间戳转换成时间 格式:yyyyMMddHHmmss 20170330144100
+     *
      * @param sTime java时间戳
      */
     public static String stampToNoSplitDateDayMinute(long sTime) {
@@ -483,52 +523,6 @@ public class DateUtils {
         Date date = new Date(sTime);
         resTime = simpleDateFormat.format(date);
         return resTime;
-    }
-
-    /**
-     * 从任务ID提取时间，精确到月份
-     * @param taskId
-     */
-    public static String getMonthFromId(String taskId) {
-        long timestamp;
-        try {
-            timestamp = Long.valueOf(taskId) / 1000; //任务id去掉后三位随机数就是时间戳
-        } catch (Exception e) {
-            log.error("从任务ID[{}]解析时间戳失败！", taskId);
-            timestamp = System.currentTimeMillis();
-        }
-        return DateUtils.timestampToDate(timestamp, DateUtils.FORMAT_YYYYMM);
-    }
-
-    /**
-     * 从任务ID提取时间，精确到月份
-     * @param taskId
-     */
-    public static String getMonthFromConfId(String taskId) {
-        long timestamp;
-        try {
-            timestamp = Long.valueOf(taskId) / 1000; //任务id去掉后三位随机数就是时间戳
-            if (timestamp < 1541001600000L) {  //11月之前的查询11月份表
-                timestamp = 1541001600000L;
-            }
-        } catch (Exception e) {
-            log.error("从任务ID[{}]解析时间戳失败！", taskId);
-            timestamp = System.currentTimeMillis();
-        }
-        return DateUtils.timestampToDate(timestamp, DateUtils.FORMAT_YYYYMM);
-    }
-
-    /***
-     * truncateDate
-     * @param date
-     * @param minutes
-     */
-    public static Date truncateDate(Date date, int minutes) {
-        long timestamp = date.getTime() / 1000;
-
-        timestamp = timestamp / (minutes * 60);
-
-        return new Date(1000 * (timestamp * minutes * 60));
     }
 
     /***
@@ -551,6 +545,7 @@ public class DateUtils {
 
     /**
      * 返回对应时间的小时
+     *
      * @param d
      */
     public static int getHour(Date d) {
